@@ -23,7 +23,8 @@ negotiates the `ECDHE-RSA-RC4-SHA` cipher suite.
 As can be seen in the above data, there is still work to be done. In
 particular, the code has a race condition when packets are sent faster than
 500 Hz; as a result, packets sent faster than that are put into a queue, 
-smearing the resulting packet stream somewhat.
+smearing the resulting packet stream somewhat. We also do not yet support 
+actually sending data over the resulting stream.
 
 The [Jupyter notebook][ipynb] for this example is also available for reference.
 When capturing data, we used `tcpdump -i iface -w File.pcap`.
