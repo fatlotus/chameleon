@@ -14,4 +14,18 @@ to reproduce the packet sizes and times with reasonably good accuracy:
 
 ![Performance graph of Chameleon versus native YouTube](https://raw.githubusercontent.com/fatlotus/chameleon/master/Evaluation.png)
 
-The above graph showed the performance of loading [https://www.youtube.com/watch?v=al2DFQEZl4M], without adblocking, for 24 seconds; this evaluation was done in Chrome, which negotiates the `ECDHE-RSA-RC4-SHA` cipher suite.
+The above graph showed the performance of loading [this video][video], without
+adblocking, for 24 seconds; this evaluation was done in Chrome, which
+negotiates the `ECDHE-RSA-RC4-SHA` cipher suite.
+
+[video]: https://www.youtube.com/watch?v=al2DFQEZl4M
+
+As can be seen in the above data, there is still work to be done. In
+particular, the code has a race condition when packets are sent faster than
+500 Hz; as a result, packets sent faster than that are put into a queue, 
+smearing the resulting packet stream somewhat.
+
+The [Jupyter notebook][ipynb] for this example is also available for reference.
+When capturing data, we used `tcpdump -i iface -w File.pcap`.
+
+[ipynb]: http://nbviewer.ipython.org/github/fatlotus/chameleon/blob/master/Analysis.ipynb
